@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.app.model.TodoMapper">
+	<!-- 일정 추가 -->
+	<insert id="insert">
+		INSERT INTO TODO (TODO_CONTENT,TODO_IMPORTANT,TODO_WRITER_ID)
+		VALUES(#{todoContent},#{todoImportant},#{todoWriterId})
+	</insert>
+
+	<!-- 일정 조회 (기본 - 미완료) -->
+	<select id="selectAll" resultType="todo">
+		SELECT TODO_NUM,TODO_CONTENT,TODO_STATUS,TODO_IMPORTANT FROM TODO
+		WHERE TODO_STATUS = #{todoStatus}
+		ORDER BY TODO_IMPORTANT DESC, TODO_NUM DESC
+	</select>
+
+	<!-- 일정 조회 (완료, 미완료, 전체) -->
+	<select id="selectAllFilter" resultType="todo">
+		SELECT TODO_NUM,TODO_CONTENT,TODO_STATUS,TODO_IMPORTANT FROM TODO
+		WHERE (#{todoStatus} = '전체' OR TODO_STATUS = #{todoStatus})
+		ORDER BY TODO_IMPORTANT DESC, TODO_NUM DESC
+	</select>
+
+	<!-- 일정 수정 (내용, 중요 여부 수정) -->
+	<update id="update">
+		UPDATE TODO SET TODO_CONTENT=COALESCE(#{todoContent},TODO_CONTENT), TODO_IMPORTANT=COALESCE(#{todoImportant},TODO_IMPORTANT)
+		WHERE TODO_NUM = #{todNum}
+	</update>
+	
+	<!-- 일정 수정 (일정 상태 : 완료 ↔ 미완료) -->
+	<update id="updateStatus">
+		UPDATE TODO SET TODO_STATUS = #{todoStatus}
+		WHERE TODO_NUM = #{toddNum}
+	</update>
+	
+	<!-- 일정 삭제 -->
+	<delete id="delete">
+		DELETE FROM TODO 
+		WHERE TODO_NUM = #{toddNum}
+	</delete>
+
+</mapper>
