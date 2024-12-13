@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import TodoBoard from './components/TodoBoard';
 import { DownOutlined } from '@ant-design/icons'; // 드롭다운 Ant-Design
@@ -45,6 +45,11 @@ function App() {
     //setTodoList(response.data); // 서버에서 받은 todo 목록으로 상태 업데이트
   }
 
+   // 첫 화면 로드 시 데이터 가져오기 (useEffect)
+   useEffect(() => {
+    todos(); // 컴포넌트가 마운트 될 때 todos 함수 호출하여 데이터를 가져옴
+  }, []); // 빈 배열을 두 번째 인수로 넣으면, 컴포넌트가 처음 마운트 될 때만 실행됩니다.
+
   // 새 Todo 추가 (비동기)
   const addItem = async () => {
     console.log("addItem 함수 실행!!", inputValue, "important",important);
@@ -90,18 +95,12 @@ function App() {
     },
   ];
 
-  // 라디오 버튼 데이터
-  const [value, setValue] = useState("미완료");
-  const onChange = (e) => {
-    console.log('radio checked', e.target.value);
-    setValue(e.target.value);
-  };
 
   return (
     <main>
       
       <h1 className='title'>TODO LIST</h1>
-      <p className='subtitle'>다솜님, 안녕하세요!</p>
+      <p className='subtitle'>안녕하세요, Todo List 페이지 입니다!</p>
 
     {/* 드롭다운 메뉴 */}
       <Dropdown
@@ -119,20 +118,14 @@ function App() {
         </Typography.Link>
       </Dropdown>
 
-        {/* 라디오 버튼 */}
-      <Radio.Group onChange={onChange} value={value}>
-        <Radio value={"미완료"}>미완료</Radio>
-        <Radio value={"완료"}>완료</Radio>
-        <Radio value={"전체"}>전체</Radio>
-      </Radio.Group>
 
       <br/> <br/>
       {/* 중요한 일정 체크박스 */}
-      <label><input type="checkbox" checked={important} onChange={() => setImportant(!important)}/> 중요한 일정</label>
+      <label><input type="checkbox" checked={important} onChange={() => setImportant(!important)}/> 중요일정</label>
       {/* 일정 입력 input 창 */}
-      <input value={inputValue} type="text" onChange={(event)=>setInputValue(event.target.value)} placeholder="할 일을 입력하세요"></input>
+      <input value={inputValue} type="text" onChange={(event)=>setInputValue(event.target.value)} placeholder="할 일을 입력하세요" ></input>
       {/* 일정 추가 버튼, 버튼을 누르면 addItem 함수 실행 */}
-      <button onClick={addItem} className='addItemButton'><PlusCircleOutlined /></button>
+      <button onClick={addItem} className='addItemButton' disabled={!inputValue}><PlusCircleOutlined /></button>
       
       <br/> <br/>
       {/* todoList */}
