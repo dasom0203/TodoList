@@ -1,0 +1,24 @@
+.addItemButton {
+  background: none;
+  border: none;
+}
+
+.myInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* 간격 */
+  margin-top: 16px;
+}
+
+.title {
+  font-size: 48px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 25px;
+  font-weight: normal;
+  text-align: center;
+}
+
