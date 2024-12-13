@@ -10,13 +10,15 @@
 	
 	<!-- ID 중복검사 -->
 	<select id="selectOne" resultType="com.project.app.model.MemberDTO">
-		SELECT MEMBER_ID FROM MEMBER
+		SELECT MEMBER_ID AS memberId FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
 	</select>
 	
 	<!-- 로그인 (ID,PW) -->
 	<select id="selectOneLogin" resultType="com.project.app.model.MemberDTO">
-		SELECT MEMBER_ID, MEMBER_PASSWORD FROM MEMBER
+		SELECT 
+		MEMBER_ID AS memberId, 
+		MEMBER_PASSWORD AS memberPassword FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
 	</select>
 	

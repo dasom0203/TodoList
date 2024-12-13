@@ -10,14 +10,24 @@
 
 	<!-- 일정 조회 (기본 - 미완료) -->
 	<select id="selectAll" resultType="com.project.app.model.TodoDTO">
-		SELECT TODO_NUM,TODO_CONTENT,TODO_STATUS,TODO_IMPORTANT FROM TODO
+		SELECT 
+		TODO_NUM AS todoNum,
+		TODO_CONTENT AS todoContent,
+		TODO_STATUS AS todoStatus,
+		TODO_IMPORTANT AS todoImportant
+		FROM TODO
 		WHERE TODO_STATUS = #{todoStatus}
 		ORDER BY TODO_IMPORTANT DESC, TODO_NUM
 	</select>
 
 	<!-- 일정 조회 (완료, 미완료, 전체) -->
 	<select id="selectAllFilter" resultType="com.project.app.model.TodoDTO">
-		SELECT TODO_NUM,TODO_CONTENT,TODO_STATUS,TODO_IMPORTANT FROM TODO
+		SELECT 
+		TODO_NUM AS todoNum,
+		TODO_CONTENT AS todoContent,
+		TODO_STATUS AS todoStatus,
+		TODO_IMPORTANT AS todoImportant
+		FROM TODO
 		WHERE (#{todoStatus} = '전체' OR TODO_STATUS = #{todoStatus})
 		ORDER BY TODO_IMPORTANT DESC, TODO_NUM
 	</select>
