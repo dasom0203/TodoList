@@ -4,22 +4,22 @@
 <mapper namespace="com.project.app.model.TodoMapper">
 	<!-- 일정 추가 -->
 	<insert id="insert">
-		INSERT INTO TODO (TODO_CONTENT,TODO_IMPORTANT,TODO_WRITER_ID)
-		VALUES(#{todoContent},#{todoImportant},#{todoWriterId})
+		INSERT INTO TODO (TODO_CONTENT,TODO_IMPORTANT)
+		VALUES(#{todoContent},#{todoImportant})
 	</insert>
 
 	<!-- 일정 조회 (기본 - 미완료) -->
-	<select id="selectAll" resultType="todo">
+	<select id="selectAll" resultType="com.project.app.model.TodoDTO">
 		SELECT TODO_NUM,TODO_CONTENT,TODO_STATUS,TODO_IMPORTANT FROM TODO
 		WHERE TODO_STATUS = #{todoStatus}
-		ORDER BY TODO_IMPORTANT DESC, TODO_NUM DESC
+		ORDER BY TODO_IMPORTANT DESC, TODO_NUM
 	</select>
 
 	<!-- 일정 조회 (완료, 미완료, 전체) -->
-	<select id="selectAllFilter" resultType="todo">
+	<select id="selectAllFilter" resultType="com.project.app.model.TodoDTO">
 		SELECT TODO_NUM,TODO_CONTENT,TODO_STATUS,TODO_IMPORTANT FROM TODO
 		WHERE (#{todoStatus} = '전체' OR TODO_STATUS = #{todoStatus})
-		ORDER BY TODO_IMPORTANT DESC, TODO_NUM DESC
+		ORDER BY TODO_IMPORTANT DESC, TODO_NUM
 	</select>
 
 	<!-- 일정 수정 (내용, 중요 여부 수정) -->

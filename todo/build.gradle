@@ -24,11 +24,33 @@ repositories {
 }
 
 dependencies {
+	// Spring Boot
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	// MySQL Connector
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	
+	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	// Mybatis 
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'//mybatis
+	
+	// Servlet API (jakarta)
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    
+	// swagger (Spring 3.x.x 이상부터 SpringFox 대신 SpringDoC 사용)
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+	
+	// lombok 라이브러리
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+ 
+	// lombok 테스트 라이브러리
+	//testImplementation 'org.projectlombok:lombok'
+	//testAnnotationProcessor 'org.projectlombok:lombok'	
+   	
 }
 
 def webappDir = "$projectDir/src/main/front"

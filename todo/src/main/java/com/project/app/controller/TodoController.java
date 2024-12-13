@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.app.model.TodoDTO;
 import com.project.app.service.TodoService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/todo")
+@Tag(name="Todo Controller", description="Todo 컨트롤러입니다.")
 public class TodoController {
 
 	@Autowired
@@ -28,7 +31,7 @@ public class TodoController {
 	// [POST] /todo : 일정 추가
 	@PostMapping
 	public ResponseEntity<Boolean> todoInsert(@RequestBody TodoDTO todoDTO) {
-
+		System.out.println("*****com.project.app.controller todoInsert 시작 *****");
 		// Service에 객체를 보내 결과를 반환한다
 		boolean response = todoService.insert(todoDTO);
 
@@ -38,14 +41,14 @@ public class TodoController {
 	}
 
 	// [GET] /todo/{todoWriterId}  *일정 조회 (기본 - 미완료)
-	@GetMapping("/{todoWriterId}")
-	public ResponseEntity<List<TodoDTO>> todoSelectAll (@PathVariable String todoWriterId, TodoDTO todoDTO){
+	@GetMapping
+	public ResponseEntity<List<TodoDTO>> todoSelectAll (TodoDTO todoDTO){
 
-		
+
 		// 기능 구분을 위한 컨디션 set
 		todoDTO.setTodoCondition("TODO_SELECTALL");
-		// 경로에서 받은 데이터를 DTO에 반영
-		todoDTO.setTodoWriterId(todoWriterId);
+//		// 경로에서 받은 데이터를 DTO에 반영
+//		todoDTO.setTodoWriterId(todoWriterId);
 
 
 		// Service에 객체를 보내 결과 반환
@@ -58,12 +61,12 @@ public class TodoController {
 
 	// [GET] /todo/{todoWriterId}/{todoStatus}  *일정 조회 필터링 (전체, 완료, 미완료)
 	@GetMapping("/filter")
-	public ResponseEntity<List<TodoDTO>> todoSelectAllFilter(@RequestParam String todoWriterId, @RequestParam String todoStatus, TodoDTO todoDTO){
+	public ResponseEntity<List<TodoDTO>> todoSelectAllFilter( @RequestParam String todoStatus, TodoDTO todoDTO){
 
 		// 기능 구분을 위한 컨디션 set
 		todoDTO.setTodoCondition("TODO_SELECTALL_FILTER");
 		// 경로에서 받은 데이터를 DTO에 반영
-		todoDTO.setTodoWriterId(todoWriterId);
+//		todoDTO.setTodoWriterId(todoWriterId);
 		todoDTO.setTodoStatus(todoStatus);
 
 
@@ -109,7 +112,7 @@ public class TodoController {
 	// [DELETE] /todo/{todoNum}  *일정 삭제
 	@DeleteMapping ("/{todoNum}")
 	public ResponseEntity<Boolean> todoDelete (@PathVariable int todoNum, TodoDTO todoDTO){
-		
+
 		// 경로에서 받은 데이터를 DTO에 반영
 		todoDTO.setTodoNum(todoNum);
 

@@ -1,7 +1,6 @@
 package com.project.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,14 +11,14 @@ import com.project.app.model.MemberDTO;
 import com.project.app.service.MemberService;
 
 @RestController
-@RequestMapping("/member")
+//@RequestMapping("/member")
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
 
 	// [POST] /member *회원가입
-	@PostMapping
+	@PostMapping("/member")
 	public ResponseEntity<Boolean> memberInsert(@RequestBody MemberDTO memberDTO){
 
 		// Service에 객체를 보내 결과를 반환한다
@@ -31,7 +30,7 @@ public class MemberController {
 
 
 	// [POST] /member/idCheck  * ID 중복검사
-	@PostMapping("/idCheck")
+	@PostMapping("/member/idCheck")
 	public ResponseEntity<MemberDTO> memberIdCheck(@RequestBody MemberDTO memberDTO){
 		
 		// Mapper 구분을 위한 컨디션
@@ -45,7 +44,7 @@ public class MemberController {
 	}
 	
 	// [POST] /member/login  * 로그인
-	@PostMapping("/login")
+	@PostMapping("/member/login")
 	public ResponseEntity<MemberDTO> memberLogin(@RequestBody MemberDTO memberDTO){
 		
 		// Mapper 구분을 위한 컨디션

@@ -3,10 +3,12 @@ package com.project.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.project.app.model.MemberDTO;
 import com.project.app.model.MemberMapper;
 
+@Service
 public class MemberServiceImpl implements MemberService{
 
 	@Autowired
