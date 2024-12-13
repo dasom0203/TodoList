@@ -1,13 +1,15 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-function TodoBoard(props){
+function TodoBoard(props) {
 
-    // console.log('todoBoard',props.todoList)
-    return (
+    console.log('todoBoard',props.todoList)
+    return (    
         <div>
             <h1>Todo List</h1>
-            {props.todoList.map((item)=><TodoItem item={item}/>)}
+            {props.todoList.map((item) => (
+                <TodoItem key={item.todoNum} item={item} />
+            ))}
         </div>
     )
 }

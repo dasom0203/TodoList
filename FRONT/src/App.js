@@ -32,21 +32,10 @@ function App() {
   const todos = async () => {
     console.log("todos 함수 실행!")
 
-    // todo 목록 보여주기
-    // const response = await axios.get('/todo');
-    //   // .then(function(response){
-    //   //   console.log(response);
-    //   // })
-    //   // .catch(function(error){
-    //   //   console.log("실패");
-    //   //   console.log(error);
-    //   // });
-    //   console.log('respons [',response,']');
-    // // console.log('response.data:', response.data); // 서버에서 받은 데이터를 확인
-    // Post 요청 
     await axios.get('/todo')
       .then(function(response){
         console.log(response);
+        setTodoList(response.data); // 서버에서 받은 todo 목록으로 상태 업데이트
       })
       .catch(function(error){
         console.log("실패");
@@ -102,7 +91,7 @@ function App() {
   ];
 
   // 라디오 버튼 데이터
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState("미완료");
   const onChange = (e) => {
     console.log('radio checked', e.target.value);
     setValue(e.target.value);
@@ -132,10 +121,9 @@ function App() {
 
         {/* 라디오 버튼 */}
       <Radio.Group onChange={onChange} value={value}>
-        <Radio value={1}>A</Radio>
-        <Radio value={2}>B</Radio>
-        <Radio value={3}>C</Radio>
-        <Radio value={4}>D</Radio>
+        <Radio value={"미완료"}>미완료</Radio>
+        <Radio value={"완료"}>완료</Radio>
+        <Radio value={"전체"}>전체</Radio>
       </Radio.Group>
 
       <br/> <br/>
