@@ -100,14 +100,14 @@ function App() {
     <main>
       
       <h1 className='title'>TODO LIST</h1>
-      <p className='subtitle'>안녕하세요, Todo List 페이지 입니다!</p>
+      <p className='subtitle'>✨Todo List 페이지 입니다!✨</p>
 
     {/* 드롭다운 메뉴 */}
       <Dropdown
         menu={{
           items,
           selectable: true,
-          defaultSelectedKeys: ['1'],
+          defaultSelectedKeys: ['1'], // 기본 1번
         }}
       >
         <Typography.Link>

@@ -27,7 +27,6 @@ function TodoItem({ item }) {
 
     return (
         // 일정 목록
-
         <div className="todo-item">
             <Checkbox
                 // 체크박스의 상태 (true/false)를 가지고 온다.
