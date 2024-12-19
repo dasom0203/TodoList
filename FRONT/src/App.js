@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
 import TodoBoard from './components/TodoBoard';
 import { DownOutlined } from '@ant-design/icons'; // 드롭다운 Ant-Design
 import { Dropdown, Space, Typography } from 'antd'; // 드롭다운 Ant-Design
-import { Radio } from 'antd'; // 라디오 버튼
+// import { Radio } from 'antd'; // 라디오 버튼
 import { PlusCircleOutlined } from '@ant-design/icons'; // + 버튼 Ant-Design
 // import customAxios from './customAxios';
-import axios from 'axios';
+import { Col, Row } from 'antd';
+
 
 // Todo List 만들기
 // ▶ 중요 여부 체크 + 인풋창 + 추가 버튼
@@ -16,8 +18,32 @@ import axios from 'axios';
 // ▶ 필터링 보기 드롭다운 버튼을 누르면 완료/미완료/전체 선택이 가능하고, 필터링 조회가 가능하다
 // ▶ 아이템 옆의 체크박스를 선택하면 상태가 완료로 변경되고 화면에서 사라진다.
 
+// const headerStyle = {
+//   textAlign: 'center',
+//   color: '#fff',
+//   height: 64,
+//   paddingInline: 48,
+//   lineHeight: '64px',
+//   backgroundColor: '#4096ff',
+// };
+// const contentStyle = {
+//   textAlign: 'center',
+//   minHeight: 120,
+//   lineHeight: '120px',
+//   color: '#fff',
+//   backgroundColor: '#0958d9',
+// };
+// const layoutStyle = {
+//   borderRadius: 8,
+//   overflow: 'hidden',
+//   width: 'calc(50% - 8px)',
+//   maxWidth: 'calc(50% - 8px)',
+// };
+
+
 function App() {
-  
+
+
   // state 선언
   // 입력값 -  초기 값은 알 수 없으므로 빈 값
   const [inputValue, setInputValue] = useState('')
@@ -102,34 +128,41 @@ function App() {
       <h1 className='title'>TODO LIST</h1>
       <p className='subtitle'>✨Todo List 페이지 입니다!✨</p>
 
-    {/* 드롭다운 메뉴 */}
-      <Dropdown
-        menu={{
-          items,
-          selectable: true,
-          defaultSelectedKeys: ['1'], // 기본 1번
-        }}
-      >
-        <Typography.Link>
-          <Space>
-            필터링
-            <DownOutlined />
-          </Space>
-        </Typography.Link>
-      </Dropdown>
-
+      <Row gutter={[16, 16]} justify="center">
+        {/* 드롭다운 메뉴 */}
+          <Dropdown
+            menu={{
+              items,
+              selectable: true,
+              defaultSelectedKeys: ['1'], // 기본 1번
+            }}
+          >
+            <Typography.Link>
+              <Space>
+                필터링
+                <DownOutlined />
+              </Space>
+            </Typography.Link>
+          </Dropdown>
+        </Row>
+        <Row gutter={[16, 16]} justify="center">
+          <br/> <br/>
+          {/* 중요한 일정 체크박스 */}
+          <Col span={6} style={{ textAlign: "center" }}>
+          <label><input type="checkbox" checked={important} onChange={() => setImportant(!important)}/> 중요일정</label>
+          {/* 일정 입력 input 창 */}
+          <input value={inputValue} type="text" onChange={(event)=>setInputValue(event.target.value)} placeholder="할 일을 입력하세요" ></input>
+          {/* 일정 추가 버튼, 버튼을 누르면 addItem 함수 실행 */}
+          <button onClick={addItem} className='addItemButton' disabled={!inputValue}><PlusCircleOutlined /></button>   
+          </Col>
+      </Row>
 
       <br/> <br/>
-      {/* 중요한 일정 체크박스 */}
-      <label><input type="checkbox" checked={important} onChange={() => setImportant(!important)}/> 중요일정</label>
-      {/* 일정 입력 input 창 */}
-      <input value={inputValue} type="text" onChange={(event)=>setInputValue(event.target.value)} placeholder="할 일을 입력하세요" ></input>
-      {/* 일정 추가 버튼, 버튼을 누르면 addItem 함수 실행 */}
-      <button onClick={addItem} className='addItemButton' disabled={!inputValue}><PlusCircleOutlined /></button>
-      
-      <br/> <br/>
-      {/* todoList */}
-      <TodoBoard todoList={todoList}></TodoBoard>
+      <Row gutter={[16, 16]} justify="center">  
+          {/* todoList */}
+          <TodoBoard todoList={todoList}></TodoBoard>
+      </Row>
+
     </main>
   );
 

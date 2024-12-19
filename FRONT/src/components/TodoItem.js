@@ -1,6 +1,8 @@
 import React from "react";
 import { Checkbox } from 'antd';
 import axios from "axios";
+import { Col, Row } from 'antd';
+
 
 function TodoItem({ item }) {
 
@@ -27,13 +29,15 @@ function TodoItem({ item }) {
 
     return (
         // 일정 목록
-        <div className="todo-item">
-            <Checkbox
-                // 체크박스의 상태 (true/false)를 가지고 온다.
-                onChange={(e) => onChange(e.target.checked)}
-                checked={item.todoStatus == '완료'}>{item.todoContent}</Checkbox>
-            <p>{item.todoImportant ? '중요' : '일반'}</p>
-        </div>
+        <Col span={24} style={{ textAlign: "left" }}>
+            <div className="todo-item">
+                <Checkbox
+                    // 체크박스의 상태 (true/false)를 가지고 온다.
+                    onChange={(e) => onChange(e.target.checked)}
+                    checked={item.todoStatus == '완료'}>{item.todoContent}</Checkbox>
+                <p>{item.todoImportant ? '중요' : '일반'}</p>
+            </div>
+        </Col>
 
     );
 }
