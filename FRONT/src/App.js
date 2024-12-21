@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 import TodoBoard from './components/TodoBoard';
-import { DownOutlined } from '@ant-design/icons'; // 드롭다운 Ant-Design
-import { Dropdown, Space, Typography } from 'antd'; // 드롭다운 Ant-Design
-// import { Radio } from 'antd'; // 라디오 버튼
+// import { DownOutlined } from '@ant-design/icons'; // 드롭다운 Ant-Design
+// import { Dropdown, Space, Typography } from 'antd'; // 드롭다운 Ant-Design
+import { Radio } from 'antd'; // 라디오 버튼
 import { PlusCircleOutlined } from '@ant-design/icons'; // + 버튼 Ant-Design
 // import customAxios from './customAxios';
 import { Col, Row } from 'antd';
@@ -105,21 +105,28 @@ function App() {
 
 
 
-  // 드롭다운 데이터
-  const items = [
-    {
-      key: '1',
-      label: '기본(미완료)',
-    },
-    {
-      key: '2',
-      label: '완료',
-    },
-    {
-      key: '3',
-      label: '전체',
-    },
-  ];
+  // // 드롭다운 데이터
+  // const items = [
+  //   {
+  //     key: '1',
+  //     label: '기본(미완료)',
+  //   },
+  //   {
+  //     key: '2',
+  //     label: '완료',
+  //   },
+  //   {
+  //     key: '3',
+  //     label: '전체',
+  //   },
+  // ];
+
+  // 라디오 버튼 호출 함수
+  const [value, setValue] = useState('미완료');
+  const onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
+  };
 
 
   return (
@@ -130,7 +137,7 @@ function App() {
 
       <Row gutter={[16, 16]} justify="center">
         {/* 드롭다운 메뉴 */}
-          <Dropdown
+          {/* <Dropdown
             menu={{
               items,
               selectable: true,
@@ -144,7 +151,16 @@ function App() {
               </Space>
             </Typography.Link>
           </Dropdown>
+        </Row> */}
+
+          {/* 라디오 버튼 */}
+          <Radio.Group onChange={onChange} value={value}>
+            <Radio value={'미완료'}>미완료</Radio>
+            <Radio value={'완료'}>완료</Radio>
+            <Radio value={'전체'}>전체</Radio>
+          </Radio.Group>
         </Row>
+
         <Row gutter={[16, 16]} justify="center">
           <br/> <br/>
           {/* 중요한 일정 체크박스 */}
