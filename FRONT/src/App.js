@@ -136,23 +136,6 @@ function App() {
       <p className='subtitle'>✨Todo List 페이지 입니다!✨</p>
 
       <Row gutter={[16, 16]} justify="center">
-        {/* 드롭다운 메뉴 */}
-          {/* <Dropdown
-            menu={{
-              items,
-              selectable: true,
-              defaultSelectedKeys: ['1'], // 기본 1번
-            }}
-          >
-            <Typography.Link>
-              <Space>
-                필터링
-                <DownOutlined />
-              </Space>
-            </Typography.Link>
-          </Dropdown>
-        </Row> */}
-
           {/* 라디오 버튼 */}
           <Radio.Group onChange={onChange} value={value}>
             <Radio value={'미완료'}>미완료</Radio>
@@ -164,14 +147,14 @@ function App() {
         <Row gutter={[16, 16]} justify="center">
           <br/> <br/>
           {/* 중요한 일정 체크박스 */}
-          <Col span={6} style={{ textAlign: "center" }}>
-          <label><input type="checkbox" checked={important} onChange={() => setImportant(!important)}/> 중요일정</label>
+          <Col span={6} style={{ textAlign: "center", display: "flex"}}>
+          <label><input type="checkbox" checked={important} onChange={() => setImportant(!important)}/>중요!</label>
           {/* 일정 입력 input 창 */}
-          <input value={inputValue} type="text" onChange={(event)=>setInputValue(event.target.value)} placeholder="할 일을 입력하세요" ></input>
+          <input value={inputValue} className='todoInput' type="text" onChange={(event)=>setInputValue(event.target.value)} placeholder="할 일을 입력하세요" ></input>
           {/* 일정 추가 버튼, 버튼을 누르면 addItem 함수 실행 */}
           <button onClick={addItem} className='addItemButton' disabled={!inputValue}><PlusCircleOutlined /></button>   
           </Col>
-      </Row>
+        </Row>
 
       <br/> <br/>
       <Row gutter={[16, 16]} justify="center">  

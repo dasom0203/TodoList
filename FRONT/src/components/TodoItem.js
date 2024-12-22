@@ -31,9 +31,8 @@ function TodoItem({ item }) {
         // 일정 목록
         <Col span={24} style={{ textAlign: "left" }}>
             <div className="todo-item">
-                <Checkbox
-                    // 체크박스의 상태 (true/false)를 가지고 온다.
-                    onChange={(e) => onChange(e.target.checked)}
+                {/* 체크박스의 상태 (true/false)를 가지고 온다. */}
+                <Checkbox onChange={(e) => onChange(e.target.checked)}
                     checked={item.todoStatus == '완료'}>{item.todoContent}</Checkbox>
                 <p>{item.todoImportant ? '중요' : '일반'}</p>
             </div>
