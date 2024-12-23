@@ -159,7 +159,7 @@ function App() {
       <br/> <br/>
       <Row gutter={[16, 16]} justify="center">  
           {/* todoList */}
-          <TodoBoard todoList={todoList}></TodoBoard>
+          <TodoBoard todoList={todoList} todos={todos}></TodoBoard>
       </Row>
 
     </main>
